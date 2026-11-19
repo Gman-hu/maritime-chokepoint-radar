@@ -1,0 +1,463 @@
+/* ==========================================================================
+   MODERN MARITIME RADAR — PLOTLY DASH TELEMETRY STYLESHEET
+   Project: Maritime Chokepoint Transit Flow & VECM Forecasting Engine
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-abyss: #05080f;
+    --bg-deep: #080d18;
+    --bg-panel: rgba(10, 16, 28, 0.86);
+    --bg-panel-elevated: rgba(14, 23, 40, 0.92);
+    --border-subtle: rgba(0, 242, 254, 0.13);
+    --border-bright: rgba(0, 242, 254, 0.38);
+    --suez-cyan: #00f2fe;
+    --suez-cyan-dim: rgba(0, 242, 254, 0.14);
+    --cape-amber: #ff9900;
+    --cape-amber-dim: rgba(255, 153, 0, 0.15);
+    --brent-rose: #fb7185;
+    --nominal-emerald: #10b981;
+    --alert-crimson: #ff3b5c;
+    --text-primary: #e6f1ff;
+    --text-secondary: #8b9bb4;
+    --text-muted: #52637a;
+    --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-abyss);
+    background-image:
+        radial-gradient(circle at 15% 12%, rgba(0, 242, 254, 0.06) 0%, transparent 38%),
+        radial-gradient(circle at 85% 22%, rgba(255, 153, 0, 0.05) 0%, transparent 40%),
+        linear-gradient(rgba(0, 242, 254, 0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 242, 254, 0.024) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* Main Terminal Container */
+.radar-shell {
+    max-width: 1680px;
+    margin: 0 auto;
+    padding: 20px 24px 36px 24px;
+}
+
+/* ==========================================================================
+   TOP COMMAND HEADER
+   ========================================================================== */
+
+.command-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(11, 19, 34, 0.95), rgba(7, 12, 22, 0.92));
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid var(--suez-cyan);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.header-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--suez-cyan);
+    margin-bottom: 6px;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+}
+
+.header-subtitle {
+    margin: 6px 0 0 0;
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    max-width: 820px;
+    line-height: 1.45;
+}
+
+.header-telemetry-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.telemetry-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 4px;
+    background: rgba(6, 11, 20, 0.85);
+    border: 1px solid rgba(139, 155, 180, 0.22);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--nominal-emerald);
+    box-shadow: 0 0 10px var(--nominal-emerald);
+    animation: radarPulse 2s infinite ease-in-out;
+}
+
+.pulse-dot.warn {
+    background-color: var(--cape-amber);
+    box-shadow: 0 0 10px var(--cape-amber);
+}
+
+.pulse-dot.critical {
+    background-color: var(--alert-crimson);
+    box-shadow: 0 0 12px var(--alert-crimson);
+}
+
+@keyframes radarPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.35); opacity: 0.55; }
+}
+
+/* ==========================================================================
+   KPI SCORECARD RIBBON
+   ========================================================================== */
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.kpi-card {
+    position: relative;
+    padding: 14px 16px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.kpi-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-1px);
+}
+
+.kpi-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--suez-cyan);
+    opacity: 0.85;
+}
+
+.kpi-card.amber::before { background: var(--cape-amber); }
+.kpi-card.rose::before { background: var(--brent-rose); }
+.kpi-card.emerald::before { background: var(--nominal-emerald); }
+
+.kpi-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.kpi-value {
+    font-family: var(--font-mono);
+    font-size: 1.42rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.15;
+}
+
+.kpi-value.cyan { color: var(--suez-cyan); text-shadow: 0 0 16px rgba(0, 242, 254, 0.28); }
+.kpi-value.amber { color: var(--cape-amber); text-shadow: 0 0 16px rgba(255, 153, 0, 0.28); }
+.kpi-value.rose { color: var(--brent-rose); }
+.kpi-value.emerald { color: var(--nominal-emerald); }
+
+.kpi-sub {
+    margin-top: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.71rem;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+/* ==========================================================================
+   MISSION CONTROL & SCENARIO SHOCK CONSOLE
+   ========================================================================== */
+
+.control-deck {
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    background: var(--bg-panel-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.control-top-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid rgba(139, 155, 180, 0.12);
+}
+
+.control-sliders-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1.15fr 1.15fr 1.1fr 1.25fr;
+    gap: 18px;
+    align-items: center;
+}
+
+.control-group-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.69rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+/* Tactical Pill RadioItems & Checklists */
+.tactical-radio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tactical-radio label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+    background: rgba(5, 9, 18, 0.85);
+    border: 1px solid rgba(139, 155, 180, 0.22);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.tactical-radio label:hover {
+    border-color: var(--suez-cyan);
+    color: #ffffff;
+}
+
+.tactical-radio input[type="radio"],
+.tactical-radio input[type="checkbox"] {
+    accent-color: var(--suez-cyan);
+    margin: 0;
+    cursor: pointer;
+}
+
+.shock-readout-banner {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: rgba(0, 242, 254, 0.07);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    color: var(--suez-cyan);
+}
+
+.shock-readout-banner.active {
+    background: rgba(255, 153, 0, 0.11);
+    border-color: rgba(255, 153, 0, 0.45);
+    color: var(--cape-amber);
+}
+
+/* Dash rc-slider dark radar overrides */
+.rc-slider-rail {
+    background-color: rgba(139, 155, 180, 0.2) !important;
+    height: 4px !important;
+}
+
+.rc-slider-track {
+    background: linear-gradient(90deg, var(--suez-cyan), #38bdf8) !important;
+    height: 4px !important;
+}
+
+.rc-slider-handle {
+    background-color: #05080f !important;
+    border: 2px solid var(--suez-cyan) !important;
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.6) !important;
+    width: 14px !important;
+    height: 14px !important;
+    margin-top: -5px !important;
+}
+
+.rc-slider-mark-text {
+    font-family: var(--font-mono) !important;
+    font-size: 0.66rem !important;
+    color: var(--text-muted) !important;
+}
+
+/* ==========================================================================
+   ANALYTICAL RADAR PANELS & GRID LAYOUTS
+   ========================================================================== */
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.mid-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+    gap: 16px;
+}
+
+.radar-panel {
+    position: relative;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 14px 16px 10px 16px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* Corner targeting reticles */
+.radar-panel::before,
+.radar-panel::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+}
+
+.radar-panel::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--suez-cyan);
+    border-left: 2px solid var(--suez-cyan);
+}
+
+.radar-panel::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid var(--cape-amber);
+    border-right: 2px solid var(--cape-amber);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(139, 155, 180, 0.1);
+}
+
+.panel-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    margin: 0;
+}
+
+.panel-tag {
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--suez-cyan);
+}
+
+.panel-tag.amber { color: var(--cape-amber); }
+.panel-tag.rose { color: var(--brent-rose); }
+
+.coint-equation-box {
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: rgba(5, 9, 18, 0.78);
+    border: 1px solid rgba(0, 242, 254, 0.14);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.71rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+}
+
+.terminal-footer {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(139, 155, 180, 0.12);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.71rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 1380px) {
+    .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .control-sliders-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .hero-grid, .mid-grid, .bottom-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .command-header { flex-direction: column; }
+    .header-telemetry-badges { justify-content: flex-start; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .control-sliders-grid { grid-template-columns: 1fr; }
+}
