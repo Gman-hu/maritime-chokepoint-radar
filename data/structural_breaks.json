@@ -1,0 +1,24 @@
+{
+  "suez_structural_breaks": [
+    "2021-07-25",
+    "2022-06-05",
+    "2023-12-22",
+    "2024-01-21",
+    "2025-09-02"
+  ],
+  "cape_structural_breaks": [
+    "2021-09-28",
+    "2023-05-06",
+    "2024-01-01"
+  ],
+  "annotated_events": [
+    {
+      "date": "2021-03-23",
+      "label": "Ever Given Grounding"
+    },
+    {
+      "date": "2023-11-19",
+      "label": "Red Sea Crisis Onset (Great Rerouting)"
+    }
+  ]
+}
