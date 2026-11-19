@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MODERN MARITIME RADAR — PLOTLY DASH TELEMETRY STYLESHEET
+   MODERN MARITIME RADAR — DASH 4 & PLOTLY 7 TELEMETRY STYLESHEET
    Project: Maritime Chokepoint Transit Flow & VECM Forecasting Engine
    ========================================================================== */
 
@@ -8,10 +8,10 @@
 :root {
     --bg-abyss: #05080f;
     --bg-deep: #080d18;
-    --bg-panel: rgba(10, 16, 28, 0.86);
-    --bg-panel-elevated: rgba(14, 23, 40, 0.92);
-    --border-subtle: rgba(0, 242, 254, 0.13);
-    --border-bright: rgba(0, 242, 254, 0.38);
+    --bg-panel: rgba(10, 16, 28, 0.90);
+    --bg-panel-elevated: rgba(14, 23, 40, 0.94);
+    --border-subtle: rgba(0, 242, 254, 0.15);
+    --border-bright: rgba(0, 242, 254, 0.42);
     --suez-cyan: #00f2fe;
     --suez-cyan-dim: rgba(0, 242, 254, 0.14);
     --cape-amber: #ff9900;
@@ -20,10 +20,25 @@
     --nominal-emerald: #10b981;
     --alert-crimson: #ff3b5c;
     --text-primary: #e6f1ff;
-    --text-secondary: #8b9bb4;
-    --text-muted: #52637a;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
     --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+    /* Dash 4.x Native Design Token Overrides (Fixes Purple Sliders & White Tooltips) */
+    --Dash-Fill-Interactive-Strong: #00f2fe;
+    --Dash-Fill-Interactive-Weak: rgba(0, 242, 254, 0.18);
+    --Dash-Stroke-Strong: rgba(0, 242, 254, 0.45);
+    --Dash-Stroke-Weak: rgba(148, 163, 184, 0.25);
+    --Dash-Text-Primary: #e6f1ff;
+    --Dash-Text-Secondary: #94a3b8;
+    --Dash-Text-Weak: #8b9bb4;
+    --Dash-Text-Disabled: #475569;
+    --Dash-Fill-Inverse-Strong: #07101f;
+    --Dash-Text-Inverse-Primary: #00f2fe;
+    --Dash-Surface-Primary: #081120;
+    --Dash-Surface-Secondary: #0d182c;
+    --Dash-Shading-Weak: rgba(0, 0, 0, 0.45);
 }
 
 *, *::before, *::after {
@@ -46,11 +61,10 @@ html, body {
     overflow-x: hidden;
 }
 
-/* Main Terminal Container */
 .radar-shell {
     max-width: 1680px;
     margin: 0 auto;
-    padding: 20px 24px 36px 24px;
+    padding: 20px 24px 40px 24px;
 }
 
 /* ==========================================================================
@@ -64,7 +78,7 @@ html, body {
     gap: 20px;
     padding: 18px 22px;
     margin-bottom: 16px;
-    background: linear-gradient(135deg, rgba(11, 19, 34, 0.95), rgba(7, 12, 22, 0.92));
+    background: linear-gradient(135deg, rgba(11, 19, 34, 0.96), rgba(7, 12, 22, 0.94));
     border: 1px solid var(--border-subtle);
     border-left: 3px solid var(--suez-cyan);
     border-radius: 6px;
@@ -110,8 +124,8 @@ html, body {
     gap: 8px;
     padding: 7px 12px;
     border-radius: 4px;
-    background: rgba(6, 11, 20, 0.85);
-    border: 1px solid rgba(139, 155, 180, 0.22);
+    background: rgba(6, 11, 20, 0.88);
+    border: 1px solid rgba(148, 163, 184, 0.24);
     font-family: var(--font-mono);
     font-size: 0.74rem;
     color: var(--text-primary);
@@ -176,7 +190,7 @@ html, body {
     right: 0;
     height: 2px;
     background: var(--suez-cyan);
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
 .kpi-card.amber::before { background: var(--cape-amber); }
@@ -186,7 +200,7 @@ html, body {
 .kpi-label {
     font-family: var(--font-mono);
     font-size: 0.68rem;
-    letter-spacing: 0.11em;
+    letter-spacing: 0.10em;
     text-transform: uppercase;
     color: var(--text-secondary);
     margin-bottom: 8px;
@@ -220,8 +234,8 @@ html, body {
    ========================================================================== */
 
 .control-deck {
-    padding: 16px 20px;
-    margin-bottom: 16px;
+    padding: 16px 20px 20px 20px;
+    margin-bottom: 18px;
     background: var(--bg-panel-elevated);
     border: 1px solid var(--border-subtle);
     border-radius: 6px;
@@ -235,15 +249,19 @@ html, body {
     align-items: center;
     gap: 14px;
     padding-bottom: 14px;
-    margin-bottom: 14px;
-    border-bottom: 1px solid rgba(139, 155, 180, 0.12);
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
 }
 
 .control-sliders-grid {
     display: grid;
-    grid-template-columns: 1.15fr 1.15fr 1.15fr 1.1fr 1.25fr;
-    gap: 18px;
-    align-items: center;
+    grid-template-columns: 1.15fr 1.15fr 1.15fr 1.05fr 1.3fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.slider-box {
+    padding: 4px 6px 10px 6px;
 }
 
 .control-group-label {
@@ -253,8 +271,8 @@ html, body {
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
+    color: #cbd5e1;
+    margin-bottom: 10px;
 }
 
 /* Tactical Pill RadioItems & Checklists */
@@ -269,8 +287,8 @@ html, body {
     align-items: center;
     gap: 6px;
     padding: 6px 11px;
-    background: rgba(5, 9, 18, 0.85);
-    border: 1px solid rgba(139, 155, 180, 0.22);
+    background: rgba(5, 9, 18, 0.88);
+    border: 1px solid rgba(148, 163, 184, 0.24);
     border-radius: 4px;
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -285,6 +303,13 @@ html, body {
     color: #ffffff;
 }
 
+.tactical-radio label:has(input:checked) {
+    background: rgba(0, 242, 254, 0.12);
+    border-color: rgba(0, 242, 254, 0.55);
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(0, 242, 254, 0.12);
+}
+
 .tactical-radio input[type="radio"],
 .tactical-radio input[type="checkbox"] {
     accent-color: var(--suez-cyan);
@@ -295,79 +320,103 @@ html, body {
 .shock-readout-banner {
     font-family: var(--font-mono);
     font-size: 0.74rem;
-    padding: 6px 12px;
+    padding: 7px 13px;
     border-radius: 4px;
-    background: rgba(0, 242, 254, 0.07);
-    border: 1px solid rgba(0, 242, 254, 0.25);
+    background: rgba(0, 242, 254, 0.08);
+    border: 1px solid rgba(0, 242, 254, 0.30);
     color: var(--suez-cyan);
 }
 
 .shock-readout-banner.active {
-    background: rgba(255, 153, 0, 0.11);
-    border-color: rgba(255, 153, 0, 0.45);
+    background: rgba(255, 153, 0, 0.12);
+    border-color: rgba(255, 153, 0, 0.50);
     color: var(--cape-amber);
 }
 
-/* Dash rc-slider dark radar overrides */
+/* Dash 4 (.dash-slider) & Legacy (.rc-slider) Unified Dark Radar Overrides */
+.dash-slider-track,
 .rc-slider-rail {
-    background-color: rgba(139, 155, 180, 0.2) !important;
-    height: 4px !important;
+    background-color: rgba(148, 163, 184, 0.24) !important;
+    height: 5px !important;
 }
 
+.dash-slider-range,
 .rc-slider-track {
-    background: linear-gradient(90deg, var(--suez-cyan), #38bdf8) !important;
-    height: 4px !important;
+    background: linear-gradient(90deg, #00f2fe, #38bdf8) !important;
+    height: 5px !important;
 }
 
+.dash-slider-thumb,
+[role="slider"],
 .rc-slider-handle {
     background-color: #05080f !important;
     border: 2px solid var(--suez-cyan) !important;
-    box-shadow: 0 0 10px rgba(0, 242, 254, 0.6) !important;
-    width: 14px !important;
-    height: 14px !important;
-    margin-top: -5px !important;
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.65) !important;
 }
 
+.dash-slider-mark,
+.dash-slider-mark-label,
 .rc-slider-mark-text {
     font-family: var(--font-mono) !important;
-    font-size: 0.66rem !important;
-    color: var(--text-muted) !important;
+    font-size: 0.68rem !important;
+    color: #94a3b8 !important;
+}
+
+[role="tooltip"],
+.dash-slider-tooltip,
+[data-radix-popper-content-wrapper] > div,
+.rc-slider-tooltip-inner {
+    background-color: #07101f !important;
+    color: var(--suez-cyan) !important;
+    border: 1px solid var(--suez-cyan) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    padding: 3px 8px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.65) !important;
 }
 
 /* ==========================================================================
-   ANALYTICAL RADAR PANELS & GRID LAYOUTS
+   ANALYTICAL RADAR PANELS & STRICT FLEX/GRID CONTAINERS
    ========================================================================== */
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 5fr 7fr;
-    gap: 16px;
-    margin-bottom: 16px;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 18px;
+    margin-bottom: 18px;
+    align-items: stretch;
 }
 
 .mid-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 18px;
+    margin-bottom: 18px;
+    align-items: stretch;
 }
 
 .bottom-grid {
     display: grid;
-    grid-template-columns: 8fr 4fr;
-    gap: 16px;
+    grid-template-columns: minmax(0, 7.6fr) minmax(0, 4.4fr);
+    gap: 18px;
+    align-items: stretch;
 }
 
 .radar-panel {
     position: relative;
+    display: flex;
+    flex-direction: column;
     background: var(--bg-panel);
     border: 1px solid var(--border-subtle);
     border-radius: 6px;
-    padding: 14px 16px 10px 16px;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+    padding: 14px 16px 14px 16px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.42);
+    min-width: 0;
 }
 
-/* Corner targeting reticles */
+/* Corner targeting reticles frame the full panel height */
 .radar-panel::before,
 .radar-panel::after {
     content: "";
@@ -375,6 +424,7 @@ html, body {
     width: 10px;
     height: 10px;
     pointer-events: none;
+    z-index: 2;
 }
 
 .radar-panel::before {
@@ -395,14 +445,16 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 10px;
-    margin-bottom: 6px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid rgba(139, 155, 180, 0.1);
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    flex-shrink: 0;
 }
 
 .panel-title {
-    font-size: 0.92rem;
+    font-size: 0.90rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     color: #ffffff;
@@ -412,7 +464,7 @@ html, body {
 .panel-tag {
     font-family: var(--font-mono);
     font-size: 0.67rem;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--suez-cyan);
 }
@@ -420,11 +472,17 @@ html, body {
 .panel-tag.amber { color: var(--cape-amber); }
 .panel-tag.rose { color: var(--brent-rose); }
 
+/* Prevent Dash 4 .dash-graph from collapsing inside Grid/Flex parents */
+.dash-graph {
+    width: 100% !important;
+    flex-shrink: 0;
+}
+
 .coint-equation-box {
-    margin-top: 8px;
+    margin-top: auto;
     padding: 10px 12px;
-    background: rgba(5, 9, 18, 0.78);
-    border: 1px solid rgba(0, 242, 254, 0.14);
+    background: rgba(5, 9, 18, 0.85);
+    border: 1px solid rgba(0, 242, 254, 0.18);
     border-radius: 4px;
     font-family: var(--font-mono);
     font-size: 0.71rem;
@@ -433,9 +491,9 @@ html, body {
 }
 
 .terminal-footer {
-    margin-top: 20px;
+    margin-top: 24px;
     padding-top: 14px;
-    border-top: 1px solid rgba(139, 155, 180, 0.12);
+    border-top: 1px solid rgba(148, 163, 184, 0.14);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
